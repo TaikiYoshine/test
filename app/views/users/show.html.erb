@@ -10,5 +10,25 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong>Sex:</strong>
+  <%= @user.sex %>
+</p>
+
+<p>
+  <strong>Birth:</strong>
+  <%= @user.birth %>
+</p>
+
+<p>
+  <strong>Hobby:</strong>
+  <%= @user.hobby %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @user.job %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
