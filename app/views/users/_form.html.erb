@@ -21,6 +21,33 @@
     <%= form.text_field :email %>
   </div>
 
+  <div class="field">
+    <%= form.label :sex %>
+    <label><%= form.radio_button :sex, "male" %> male </label>
+    <label><%= form.radio_button :sex, "female" %> female </label>
+    <label><%= form.radio_button :sex, "other" %> other </label>
+  </div>
+
+  <div class="field">
+    <%= form.label :birth %>
+    <%= form.date_select(
+      :birth,
+      start_year: 1930,
+      end_year: Time.now.year,
+      default: Date.new(1980,1,1)
+    ) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hobby %>
+    <%= form.text_field :hobby %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job %>
+    <%= form.text_field :job %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
