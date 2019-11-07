@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<h1>Search</h1>
+
+<%= render 'form', user: @user, method: :get %>
 
 <h1>Users</h1>
 
@@ -34,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'ユーザー登録', new_user_path %>

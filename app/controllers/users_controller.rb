@@ -6,7 +6,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @user = User.new
+    if params[:user]
+      @users = User.where(user_params)
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
