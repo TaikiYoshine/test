@@ -1,34 +1,35 @@
 <p id="notice"><%= notice %></p>
+<h1>ユーザー情報</h1>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名前:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>メールアドレス:</strong>
   <%= @user.email %>
 </p>
 
 <p>
-  <strong>Sex:</strong>
+  <strong>性別:</strong>
   <%= @user.sex %>
 </p>
 
 <p>
-  <strong>Birth:</strong>
+  <strong>生年月日:</strong>
   <%= @user.birth %>
 </p>
 
 <p>
-  <strong>Hobby:</strong>
+  <strong>趣味:</strong>
   <%= @user.hobby %>
 </p>
 
 <p>
-  <strong>Job:</strong>
+  <strong>職業:</strong>
   <%= @user.job %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '編集', edit_user_path(@user) %> |
+<%= link_to '戻る', users_path %>

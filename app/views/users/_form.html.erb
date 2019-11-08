@@ -12,34 +12,34 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, "名前" %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.label :email, "メールアドレス" %>
     <%= form.text_field :email %>
   </div>
 
   <div class="field">
-    <%= form.label :sex %>
-    <label><%= form.radio_button :sex, "male" %> male </label>
-    <label><%= form.radio_button :sex, "female" %> female </label>
-    <label><%= form.radio_button :sex, "other" %> other </label>
+    <%= form.label :sex, "性別" %>
+    <label><%= form.radio_button :sex, "男性" %> 男性 </label>
+    <label><%= form.radio_button :sex, "女性" %> 女性 </label>
+    <label><%= form.radio_button :sex, "その他" %> その他 </label>
   </div>
 
   <div class="field">
-    <%= form.label :birth %>
+    <%= form.label :birth, "生年月日" %>
     <%= form.text_field :birth %>
   </div>
 
   <div class="field">
-    <%= form.label :hobby %>
+    <%= form.label :hobby, "趣味" %>
     <%= form.text_field :hobby %>
   </div>
 
   <div class="field">
-    <%= form.label :job %>
+    <%= form.label :job, "職業" %>
     <%= form.text_field :job %>
   </div>
 

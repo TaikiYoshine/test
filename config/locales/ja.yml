@@ -7,6 +7,14 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        sex: 性別
+        birth: 生年月日
+        hobby: 趣味
+        job: 職業
   date:
     abbr_day_names:
     - 日

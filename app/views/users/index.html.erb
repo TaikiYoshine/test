@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
-<h1>Search</h1>
+<h1>ユーザー検索</h1>
 
 <%= render 'form', user: @user, method: :get %>
 
-<h1>Users</h1>
+<h1>ユーザー一覧</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Sex</th>
-      <th>Birth</th>
-      <th>Hobby</th>
-      <th>Job</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>性別</th>
+      <th>生年月日</th>
+      <th>趣味</th>
+      <th>職業</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -27,9 +27,9 @@
         <td><%= user.birth %></td>
         <td><%= user.hobby %></td>
         <td><%= user.job %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '詳細', user %></td>
+        <td><%= link_to '編集', edit_user_path(user) %></td>
+        <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
