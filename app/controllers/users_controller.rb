@@ -3,11 +3,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
+  include UsersHelper
   # GET /users
   # GET /users.json
   def index
     @user = User.new
     @users = User.all
+    #総ユーザー数取得
+    @users_num = User.all.count.to_i
+    #ユーザー検索をしている
     if params[:user]
       if params[:user][:name].present?
         @users = @users.where(name: params[:user][:name])
@@ -28,6 +32,7 @@ class UsersController < ApplicationController
         @users = @users.where(job: params[:user][:job])
       end
     end
+    paging
   end
 
   # GET /users/1

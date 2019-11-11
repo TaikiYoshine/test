@@ -19,7 +19,7 @@ module PracticeApp
     # the framework and any gems in your application.
 
     config.i18n.default_locale = :ja # デフォルトのlocaleを日本語(:ja)にする
-    #i18nのうh句数ロケールファイルが読み込まれるようpathを通す
+    # i18nのうh句数ロケールファイルが読み込まれるようpathを通す
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
   end
 end

@@ -5,5 +5,9 @@ Rails.application.routes.draw do
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root 'users#index'
+  get '/:id', to: 'users#index'
+  # get '/users', to: redirect('/1')
+  get '/users' => redirect('/1')
+  # rootをページ番号1にリダイレクトさせている
+  root to: redirect('/1')
 end

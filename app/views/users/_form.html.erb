@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true, method: method ) do |form| %>
+<%= form_with(model: user, local: true, method: method, url: url) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2>入力値エラーです</h2>

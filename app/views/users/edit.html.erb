@@ -1,6 +1,6 @@
 <h1>ユーザー情報編集</h1>
 
-<%= render 'form', user: @user, method: :patch %>
+<%= render 'form', user: @user, method: :patch, url:"/users/#{params[:id]}" %>
 
 <%= link_to '詳細', @user %>
-<%= link_to '戻る', users_path %>
+<%= link_to '戻る', '/1' %>

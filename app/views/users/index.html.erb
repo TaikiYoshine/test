@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <h1>ユーザー検索</h1>
 
-<%= render 'form', user: @user, method: :get %>
+<%= render 'form', user: @user, method: :get, url: "/#{params[:id].to_i}" %>
 
 <h1>ユーザー一覧</h1>
 
@@ -32,8 +32,19 @@
         <td><%= link_to '削除', user, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' } %></td>
       </tr>
     <% end %>
+    <tr>
+      <td align = "center" colspan="8"><%= "#{params[:id]}ページ" %>
+    </tr>
   </tbody>
 </table>
+<tr>
+  <% if params[:id].to_i >= 2 %>
+    <td><%= link_to '前へ', "/#{params[:id].to_i - 1}"%>
+  <% end %>
+  <% if @users_num - (params[:id].to_i * 10) > 0 %>
+    <td><%= link_to '次へ', "/#{params[:id].to_i + 1}"%>
+  <% end %>
+</tr>
 
 <br>
 
