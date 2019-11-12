@@ -37,12 +37,118 @@
     </tr>
   </tbody>
 </table>
+<table>
+  <tr>
+    <% if params[:id].to_i == 1 %>
+      <td align = "center" colspan="2">
+      <%= @page %>
+      </td>
+      <% if @users_num > 10 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 1}", "#{params[:id].to_i + 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if @users_num > 20 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 2}", "#{params[:id].to_i + 2}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if @users_num > 30 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 3}", "#{params[:id].to_i + 3}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if @users_num > 40 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 4}", "#{params[:id].to_i + 4}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+    <% elsif params[:id].to_i == 2 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 1}", "#{params[:id].to_i - 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= @page %>
+      </td>
+      <% if @users_num > 20 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 1}", "#{params[:id].to_i + 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if @users_num > 30 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 2}", "#{params[:id].to_i + 2}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if @users_num > 40 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 3}", "#{params[:id].to_i + 3}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+    <% elsif params[:id].to_i == (@users_num.to_f / 10.to_f).ceil - 1 %>
+     <% if params[:id].to_i > 3 %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 3}", "#{params[:id].to_i - 3}?#{request.query_parameters.to_query}" %>
+      </td>
+     <% end %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 2}", "#{params[:id].to_i - 2}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 1}", "#{params[:id].to_i - 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= @page %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 1}", "#{params[:id].to_i + 1}?#{request.query_parameters.to_query}" %>
+      </td>
+    <% elsif params[:id].to_i == (@users_num.to_f / 10.to_f).ceil %>
+      <% if params[:id].to_i > 4 %>
+       <td align = "center" colspan="2">
+        <%= link_to "#{@page - 4}", "#{params[:id].to_i - 4}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <% if params[:id].to_i > 3 %>
+       <td align = "center" colspan="2">
+        <%= link_to "#{@page - 3}", "#{params[:id].to_i - 3}?#{request.query_parameters.to_query}" %>
+      </td>
+      <% end %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 2}", "#{params[:id].to_i - 2}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 1}", "#{params[:id].to_i - 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= @page %>
+      </td>
+    <% else %>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 2}", "#{params[:id].to_i - 2}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page - 1}", "#{params[:id].to_i - 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= @page %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 1}", "#{params[:id].to_i + 1}?#{request.query_parameters.to_query}" %>
+      </td>
+      <td align = "center" colspan="2">
+        <%= link_to "#{@page + 2}", "#{params[:id].to_i + 2}?#{request.query_parameters.to_query}" %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+<br>
 <tr>
   <% if params[:id].to_i >= 2 %>
-    <td><%= link_to '前へ', "/#{params[:id].to_i - 1}"%>
+    <td><%= link_to '最初へ', "/1?#{request.query_parameters.to_query}"%>
   <% end %>
   <% if @users_num - (params[:id].to_i * 10) > 0 %>
-    <td><%= link_to '次へ', "/#{params[:id].to_i + 1}"%>
+    <td><%= link_to '最後へ', "/#{(@users_num.to_f / 10.to_f).ceil}?#{request.query_parameters.to_query}"%>
   <% end %>
 </tr>
 
