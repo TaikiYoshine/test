@@ -31,5 +31,13 @@
   <%= @user.job %>
 </p>
 
+<p>
+  <strong>好きな食べ物:</strong>
+  <% @user.favfoods.each do |f| %>
+  <%= f.favorite_food %>
+  <% end %>
+</p>
+
 <%= link_to '編集', edit_user_path(@user) %> |
+<%= link_to '好きな食べ物', "/users/#{@user.id}/favfoods" %>|
 <%= link_to '戻る', '/1' %>

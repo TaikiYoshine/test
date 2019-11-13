@@ -1,0 +1,6 @@
+<h1>Editing Favfood</h1>
+
+<%= render 'form', favfood: @favfood, method: :patch, url: user_favfood_path  %>
+
+<%= link_to 'Show', user_favfood_path %> 
+<%= link_to 'Back', user_favfoods_path %>

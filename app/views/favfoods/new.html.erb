@@ -1,0 +1,5 @@
+<h1>New Favfood</h1>
+
+<%= render 'form', favfood: @favfood , method: :post, url: user_favfoods_path%>
+
+<%= link_to 'Back', user_favfoods_path %>

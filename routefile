@@ -1,12 +1,12 @@
                                Prefix Verb   URI Pattern                                                                              Controller#Action
-                           microposts GET    /microposts(.:format)                                                                    microposts#index
-                                      POST   /microposts(.:format)                                                                    microposts#create
-                        new_micropost GET    /microposts/new(.:format)                                                                microposts#new
-                       edit_micropost GET    /microposts/:id/edit(.:format)                                                           microposts#edit
-                            micropost GET    /microposts/:id(.:format)                                                                microposts#show
-                                      PATCH  /microposts/:id(.:format)                                                                microposts#update
-                                      PUT    /microposts/:id(.:format)                                                                microposts#update
-                                      DELETE /microposts/:id(.:format)                                                                microposts#destroy
+                        user_favfoods GET    /users/:user_id/favfoods(.:format)                                                       favfoods#index
+                                      POST   /users/:user_id/favfoods(.:format)                                                       favfoods#create
+                     new_user_favfood GET    /users/:user_id/favfoods/new(.:format)                                                   favfoods#new
+                    edit_user_favfood GET    /users/:user_id/favfoods/:id/edit(.:format)                                              favfoods#edit
+                         user_favfood GET    /users/:user_id/favfoods/:id(.:format)                                                   favfoods#show
+                                      PATCH  /users/:user_id/favfoods/:id(.:format)                                                   favfoods#update
+                                      PUT    /users/:user_id/favfoods/:id(.:format)                                                   favfoods#update
+                                      DELETE /users/:user_id/favfoods/:id(.:format)                                                   favfoods#destroy
                                 users GET    /users(.:format)                                                                         users#index
                                       POST   /users(.:format)                                                                         users#create
                              new_user GET    /users/new(.:format)                                                                     users#new

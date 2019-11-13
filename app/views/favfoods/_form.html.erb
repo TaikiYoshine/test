@@ -1,0 +1,27 @@
+<%= form_with(model: favfood, local: true, method: method, url: url) do |form| %>
+  <% if favfood.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(favfood.errors.count, "error") %> prohibited this favfood from being saved:</h2>
+
+      <ul>
+        <% favfood.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :favorite_food %>
+    <%= form.text_area :favorite_food %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, value: params[:user_id], readonly: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
