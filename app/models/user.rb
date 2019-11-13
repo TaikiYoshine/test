@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :microposts
+  has_many :favfoods
   # 各カラムの存在性
   validates :name, presence: true
   validates :email, presence: true
