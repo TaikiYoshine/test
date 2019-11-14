@@ -18,11 +18,6 @@ class FavfoodsController < ApplicationController
     @favfood = Favfood.new
   end
 
-  def user_new
-    @favfood = Favfood.new
-    render 'user_new'
-  end
-
   # GET /favfoods/1/edit
   def edit; end
 
@@ -64,26 +59,6 @@ class FavfoodsController < ApplicationController
       format.html { redirect_to user_favfoods_path, notice: 'Favfood was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def user_destroy
-    @favfood = Favfood.find(params[:food_id])
-    @favfood.destroy
-    respond_to do |format|
-      format.html { redirect_to "/users/#{params[:id]}/favfoods", notice: 'Favfood was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  def menu
-    @favfoods = Favfood.where(user_id: params[:id])
-    render 'menu'
-  end
-
-  def user_edit
-    @user_id = @user.id
-    params[:id]
-    render 'user_edit'
   end
 
   private
