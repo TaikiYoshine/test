@@ -35,12 +35,13 @@ class UsersController < ApplicationController
     @users_num = @users.count.to_i
     paging
     @page = params[:id].to_i
+    # kaminari
+    @posts = User.all.page(params[:page]).per(10)
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
   end
 
   # GET /users/new

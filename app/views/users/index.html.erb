@@ -110,3 +110,13 @@
 <br>
 
 <%= link_to 'ユーザー登録', new_user_path %>
+
+<% @posts.each do |post| %>
+ <div class="panel panel-success">
+   <div class="panel-body">
+    <%= link_to(post.name,"/users/#{post.id}") %>
+   </div>
+   <div class="panel-footer"></div>
+ </div>
+<% end %>
+<%= paginate @posts, window: 2 %>
