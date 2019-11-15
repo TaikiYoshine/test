@@ -37,12 +37,29 @@ class UsersController < ApplicationController
     @page = params[:id].to_i
     # kaminari
     @posts = User.all.page(params[:page]).per(10)
+    @page_limit = 10
+
+    @max_page_num = @users_num / @page_limit
+    @max_page_num += 1 if (@users_num % @page_limit) > 0
+
+    @start_page = if @page > @max_page_num - 2
+                    @max_page_num - 4
+                  elsif @page > 3
+                    @page - 2
+                  else
+                    1
+                  end
+
+    @page_count = if @max_page_num > 4
+                    5
+                  else
+                    @max_page_num
+                  end
   end
 
   # GET /users/1
   # GET /users/1.json
-  def show
-  end
+  def show; end
 
   # GET /users/new
   def new
