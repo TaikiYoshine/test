@@ -98,6 +98,7 @@
   </tr>
 </table>
 <br>
+<table>
 <tr>
   <% if params[:id].to_i >= 2 %>
     <td><%= link_to '最初へ', "/1?#{request.query_parameters.to_query}"%>
@@ -106,7 +107,31 @@
     <td><%= link_to '最後へ', "/#{(@users_num.to_f / 10.to_f).ceil}?#{request.query_parameters.to_query}"%>
   <% end %>
 </tr>
-
+</table>
 <br>
-
 <%= link_to 'ユーザー登録', new_user_path %>
+
+<% @posts.each do |post| %>
+ <div class="panel panel-success">
+   <div class="panel-body">
+    <%= link_to(post.name,"/users/#{post.id}") %>
+   </div>
+   <div class="panel-footer"></div>
+ </div>
+<% end %>
+<%= paginate @posts, window: 2 %>
+
+<table>
+  <tr>
+    <% @start_page.upto(@start_page + @page_count - 1) do |num| %>
+      <td align = "center" colspan = "2">
+      <% if num == @page %>
+        <%= @page %>
+      <% else %>
+        <%= link_to "#{num}", "#{num}?#{request.query_parameters.to_query}" %>
+      <% end %>
+      </td>
+      <% end %>
+    </td>
+  </tr>
+</table>
