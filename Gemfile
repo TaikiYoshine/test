@@ -34,13 +34,15 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'kaminari' # ページネーション
   gem 'pry-byebug' # デバッグを実施(Ruby 2.0以降で動作する)
   gem 'pry-doc' # methodを表示
   gem 'pry-rails'
   gem 'pry-stack_explorer' # スタックをたどれる
-  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 4.0.0.beta3'
 end
 
 group :development do
