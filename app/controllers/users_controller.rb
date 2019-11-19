@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    puts 'index!!!'
     @user = User.new
     @users = User.all
     @page = 1
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    puts 'new!'
     @user = User.new
   end
 
@@ -72,6 +74,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    puts 'create!'
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -88,6 +91,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    puts 'update!'
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
