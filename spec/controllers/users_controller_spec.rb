@@ -80,7 +80,7 @@ RSpec.describe UsersController, type: :controller do
     subject { get :edit }
     context '正常' do
       let(:user) { create(:user) }
-      it 'リクエストは200 OKとなること' do
+      it 'レスポンスは200 OKとなること' do
         expect(response.status).to eq 200
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe UsersController, type: :controller do
     end
     subject { get :show, params: { id: @user.id } }
     context '正常' do
-      it 'リクエストは200' do
+      it 'レスポンスは200' do
         is_expected.to have_http_status(200)
       end
     end
