@@ -7,10 +7,11 @@ RSpec.describe UsersController, type: :controller do
     subject { get :index }
     context '正常' do
       it '正しいレスポンスを返すこと' do
+        subject
         expect(response).to be_successful
       end
       it 'has a 200 status code' do
-        expect(response.status).to eq 200
+        is_expected.to have_http_status(200)
       end
     end
   end
@@ -19,9 +20,10 @@ RSpec.describe UsersController, type: :controller do
     subject { get :new, params: {}, session: {} }
     context '正常' do
       it 'リクエストは200 OKとなること' do
-        expect(response.status).to eq 200
+        is_expected.to have_http_status(200)
       end
       it '@userに新しいユーザーを割り当てること' do
+        subject
         expect(assigns(:user)).to be_a_new(User)
       end
     end
@@ -31,39 +33,44 @@ RSpec.describe UsersController, type: :controller do
     subject { post :create, params: { user: user_attributes }, session: {} }
     context '有効なパラメーターの場合' do
       let(:user_attributes) { attributes_for(:user) }
-      it 'リクエストは200' do
-        expect(response.status).to eq 200
-      end
       it '新しいユーザをsave' do
         expect do
-          post :create, params: { user: user_attributes }, session: {}
+          subject
         end.to change(User, :count).by(1)
       end
       it '登録されたユーザーの詳細画面へリダイレクトされる' do
-        post :create, params: { user: user_attributes }, session: {}
+        subject
         expect(response).to redirect_to(User.last)
       end
     end
     context '無効なパラメータの場合' do
+      let(:user_attributes) { attributes_for(:user) }
       it '名前が無ければ登録できない' do
+        subject
         expect(build(:user, name: '')).to_not be_valid
       end
       it 'メールアドレスが無ければ登録できない' do
+        subject
         expect(build(:user, email: '')).to_not be_valid
       end
       it '生年月日が無ければ登録できない' do
+        subject
         expect(build(:user, birth: '')).to_not be_valid
       end
       it '性別が無ければ登録できない' do
+        subject
         expect(build(:user, sex: '')).to_not be_valid
       end
       it '趣味が無ければ登録できない' do
+        subject
         expect(build(:user, hobby: '')).to_not be_valid
       end
       it '職業が無ければ登録できない' do
+        subject
         expect(build(:user, job: '')).to_not be_valid
       end
       it 'メールアドレスが型通りでないと登録できない' do
+        subject
         expect(build(:user, email: 'xxxxxxx')).to_not be_valid
       end
     end
@@ -83,8 +90,10 @@ RSpec.describe UsersController, type: :controller do
     subject { patch :update }
     context '正常' do
       let(:user) { create(:user) }
-      it 'リクエストは200 OKとなること' do
-        expect(response.status).to eq 200
+      it '各ユーザーの詳細ページへリダイレクトする' do
+        user_params = attributes_for(:user, name: 'new name')
+        patch :update, params: { id: user.id, user: user_params }
+        expect(response).to redirect_to "/users/#{user.id}"
       end
       it 'ユーザー情報を更新できる' do
         user_params = attributes_for(:user, name: 'new name')
@@ -109,7 +118,7 @@ RSpec.describe UsersController, type: :controller do
     subject { get :show, params: { id: @user.id } }
     context '正常' do
       it 'リクエストは200' do
-        expect(response.status).to eq(200)
+        is_expected.to have_http_status(200)
       end
     end
   end
