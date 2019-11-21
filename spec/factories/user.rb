@@ -12,4 +12,22 @@ FactoryBot.define do
     hobby { '散歩' }
     job { 'ノージョブ' }
   end
+  factory :testuser1, class: User do
+    id { 106 }
+    name { 'POYO' }
+    email { 'yasao@gmail.com' }
+    birth { '2019/9/11' }
+    sex { '男性' }
+    hobby { '缶蹴り' }
+    job { 'ノージョブ' }
+  end
+  factory :testuser2, class: User do
+    id { 107 }
+    name { 'GAL' }
+    email { 'gal@gmail.com' }
+    birth { '2015/9/11' }
+    sex { '女性' }
+    hobby { 'パラパラ' }
+    job { 'ギャル' }
+  end
 end
