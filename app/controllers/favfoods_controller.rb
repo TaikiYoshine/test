@@ -25,7 +25,6 @@ class FavfoodsController < ApplicationController
   # POST /favfoods.json
   def create
     @favfood = Favfood.new(favfood_params)
-
     respond_to do |format|
       if @favfood.save
         format.html { redirect_to user_favfood_path(id: @favfood.id), notice: 'Favfood was successfully created.' }
