@@ -41,7 +41,7 @@ RSpec.describe FavfoodsController, type: :controller do
       end
     end
     context 'favorite_foodが空' do
-      let(:params) { { favfood: { favorite_food: "", user_id: 105 }, user_id: 105 } }
+      let(:params) { { favfood: { favorite_food: '', user_id: 105 }, user_id: 105 } }
       it 'new画面をrender' do
         subject
         expect(response).to render_template(:new)
@@ -76,7 +76,7 @@ RSpec.describe FavfoodsController, type: :controller do
       end
     end
     context 'favorite_foodが空' do
-      let(:params) { { favfood: { favorite_food: "" }, user_id: user.id, id: favfood.id } }
+      let(:params) { { favfood: { favorite_food: '' }, user_id: user.id, id: favfood.id } }
       it 'new画面をrender' do
         is_expected.to have_http_status(200)
         expect(response).to render_template(:edit)
