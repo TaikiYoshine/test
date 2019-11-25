@@ -9,12 +9,20 @@ RSpec.describe UsersController, type: :controller do
     let!(:user0) { create(:user) }
     let!(:user1) { create(:testuser1) }
     let!(:user2) { create(:testuser2) }
-    context '正常' do
+    context '値を入力して検索' do
       let(:params) { { user: { id: 106, name: 'POYO', email: 'yasao@gmail.com', birth: '2019/9/11', sex: '男性', hobby: '缶蹴り', job: 'ノージョブ' } } }
-      it '条件に一致したレコードのみ検索' do
+      it '条件に一致したレコードのみ表示' do
         is_expected.to have_http_status(200)
         users = assigns[:users]
         expect(users[0]).to eq user1
+      end
+    end
+    context '値を入力せずに検索' do
+      let(:params) { { user: { name: nil, email: nil, birth: nil, sex: nil, hobby: nil, job: nil } } }
+      it '全レコードを表示' do
+        is_expected.to have_http_status(200)
+        users = assigns[:users]
+        expect(users.count).to eq User.count
       end
     end
   end
@@ -30,53 +38,63 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST ＃createアクション' do
-    subject { post :create, params: { user: attributes_for(:user) }, session: {} }
+    subject { post :create, params: params }
+    let(:params) {}
     context '有効なパラメーターの場合' do
+      let(:params) { { user: attributes_for(:user) } }
       it '新しいユーザをsave、リダイレクト' do
         expect { subject }.to change(User, :count).by(1)
+        expect(response.status).to be 302
         expect(response).to redirect_to(User.last)
       end
     end
     context '無効なパラメーター' do
       context '名前がnil' do
+        let(:params) { { user: attributes_for(:user, name: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, name: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context 'メールアドレスがnil' do
+        let(:params) { { user: attributes_for(:user, email: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, email: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context '生年月日がnil' do
+        let(:params) { { user: attributes_for(:user, birth: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, birth: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context '性別がnil' do
+        let(:params) { { user: attributes_for(:user, sex: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, sex: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context '趣味がnil' do
+        let(:params) { { user: attributes_for(:user, hobby: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, hobby: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context '職業がnil' do
+        let(:params) { { user: attributes_for(:user, job: nil) } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, job: nil) }
+          subject
           expect(response).to render_template(:new)
         end
       end
       context 'メールアドレスが型通りでない' do
+        let(:params) { { user: attributes_for(:user, email: 'xxxxx') } }
         it 'new画面をrender' do
-          post :create, params: { user: attributes_for(:user, email: 'xxxxx') }
+          subject
           expect(response).to render_template(:new)
         end
       end
@@ -132,6 +150,7 @@ RSpec.describe UsersController, type: :controller do
     context '正常' do
       it 'ユーザーを削除できる' do
         expect { subject }.to change(User, :count).by(-1)
+        expect(response.status).to be 302
       end
     end
   end
