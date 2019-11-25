@@ -5,16 +5,16 @@ require 'rails_helper'
 RSpec.describe FavfoodsController, type: :controller do
   describe 'GET #index' do
     subject { get :index, params: params }
-    let!(:favfood) { create(:favfood, user: user) }
-    let!(:user) { create(:user) }
-    let!(:user1) { create(:testuser1) }
-    let!(:testfood1) { create(:testfood1, user: user1) }
+    let!(:favfood1) { create(:favfood, user: user1) }
+    let(:user1) { create(:user) }
+    let!(:favfood2) { create(:testfood1, user: user2) }
+    let(:user2) { create(:testuser1) }
     let(:params) {}
     context '正常' do
-      let (:params) { { user_id: user.id } }
+      let(:params) { { user_id: user1.id } }
       it 'user.idと表示されているfavfoodのfavfood.user_idが一致する' do
         is_expected.to have_http_status(200)
-        expect(assigns[:favfoods][0].user_id).to eq user.id 
+        expect(assigns[:favfoods][0].user_id).to eq user1.id 
       end
     end
   end
@@ -30,12 +30,21 @@ RSpec.describe FavfoodsController, type: :controller do
   end
 
   describe 'POST #create' do
-    subject { post :create, params: { favfood: attributes_for(:favfood), user_id: 105 } }
+    subject { post :create, params: params }
     let!(:user) { create(:user) }
     context '正常' do
+      let(:params) { { favfood: attributes_for(:favfood), user_id: 105 } }
       it '新しいfavfoodがsave、リダイレクト' do
         expect { subject }.to change(Favfood, :count).by(1)
-        expect(response).to redirect_to "/users/#{user.id}/favfoods/1"
+        expect(response.status).to be 302 
+        expect(response).to redirect_to "/users/#{user.id}/favfoods/#{Favfood.last.id}"
+      end
+    end
+    context 'favorite_foodが空' do
+      let(:params) { { favfood: { favorite_food: "", user_id: 105 }, user_id: 105 } }
+      it 'new画面をrender' do
+        subject
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -56,14 +65,21 @@ RSpec.describe FavfoodsController, type: :controller do
 
   describe 'PATCH #update' do
     subject { patch :update, params: params }
+    let!(:favfood) { create(:favfood, user: user) }
+    let!(:user) { create(:user) }
     context '正常' do
-      let!(:favfood) { create(:favfood, user: user) }
-      let!(:user) { create(:user) }
       let(:params) { { user_id: user.id, id: favfood.id, favfood: attributes_for(:favfood, favorite_food: 'new food') } }
       it 'favfoodを更新、リダイレクトする' do
         is_expected.to have_http_status(302)
         expect(favfood.reload.favorite_food).to eq 'new food'
         expect(response).to redirect_to "/users/#{user.id}/favfoods/#{favfood.id}"
+      end
+    end
+    context 'favorite_foodが空' do
+      let(:params) { { favfood: { favorite_food: "" }, user_id: user.id, id: favfood.id } }
+      it 'new画面をrender' do
+        is_expected.to have_http_status(200)
+        expect(response).to render_template(:edit)
       end
     end
   end
