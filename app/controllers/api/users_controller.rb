@@ -16,7 +16,7 @@ class Api::UsersController < ApplicationController
     @users = @users.where('sex = ?', params[:sex]) if params[:sex].present?
     @users = @users.where('hobby = ?', params[:hobby]) if params[:hobby].present?
     @users = @users.where('job = ?', params[:job]) if params[:job].present?
-    render json: @users.to_json(include: [:favfoods])
+    render json: @users.to_json(:include => {:favfoods => {:only => :favorite_food}})
   end
 
   # POST /api/v1/users
