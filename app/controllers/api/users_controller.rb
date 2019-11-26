@@ -8,14 +8,15 @@ class Api::UsersController < ApplicationController
 
   # GET /api/v1/users
   def index
-    @users = User.all
+    @user = User.includes(:favfoods)
+    @users = @user.all
     @users = @users.where('name = ?', params[:name]) if params[:name].present?
     @users = @users.where('email = ?', params[:email]) if params[:email].present?
     @users = @users.where('birth = ?', params[:birth]) if params[:birth].present?
     @users = @users.where('sex = ?', params[:sex]) if params[:sex].present?
     @users = @users.where('hobby = ?', params[:hobby]) if params[:hobby].present?
     @users = @users.where('job = ?', params[:job]) if params[:job].present?
-    render json: @users
+    render json: @users.to_json(include: [:favfoods])
   end
 
   # POST /api/v1/users
