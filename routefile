@@ -18,9 +18,12 @@
                                       GET    /:id(.:format)                                                                           users#index
                                       GET    /users(.:format)                                                                         redirect(301, /1)
                                  root GET    /                                                                                        redirect(301, /1)
-                         api_v1_users GET    /api/v1/users(.:format)                                                                  api/users#index
-                                      GET    /api/v1/users/:id(.:format)                                                              api/users#show
+                            api_users GET    /api/v1/users(.:format)                                                                  api/users#index
                                       POST   /api/v1/users(.:format)                                                                  api/users#create
+                         new_api_user GET    /api/v1/users/new(.:format)                                                              api/users#new
+                        edit_api_user GET    /api/v1/users/:id/edit(.:format)                                                         api/users#edit
+                             api_user GET    /api/v1/users/:id(.:format)                                                              api/users#show
+                                      PATCH  /api/v1/users/:id(.:format)                                                              api/users#update
                                       PUT    /api/v1/users/:id(.:format)                                                              api/users#update
                                       DELETE /api/v1/users/:id(.:format)                                                              api/users#destroy
         rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#create

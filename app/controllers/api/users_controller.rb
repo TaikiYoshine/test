@@ -9,6 +9,12 @@ class Api::UsersController < ApplicationController
   # GET /api/v1/users
   def index
     @users = User.all
+    @users = @users.where('name = ?', params[:name]) if params[:name].present?
+    @users = @users.where('email = ?', params[:email]) if params[:email].present?
+    @users = @users.where('birth = ?', params[:birth]) if params[:birth].present?
+    @users = @users.where('sex = ?', params[:sex]) if params[:sex].present?
+    @users = @users.where('hobby = ?', params[:hobby]) if params[:hobby].present?
+    @users = @users.where('job = ?', params[:job]) if params[:job].present?
     render json: @users
   end
 
@@ -35,11 +41,9 @@ class Api::UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:id])
-    if @user
-    else
-      render json: 'エラー: ユーザーが存在しません', status: 422
-    end
+    @user = User.find(params[:id])
+  rescue StandardError
+    render json: 'エラー: ユーザーが存在しません', status: 404
   end
 
   def user_params
