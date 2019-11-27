@@ -26,7 +26,7 @@ class Api::UsersController < ApplicationController
 
   # GET /api/v1/users/:id
   def show
-    render json: @user
+    render json: @user.to_json(:include => {:favfoods => {:only => :favorite_food}})
   end
 
   # PATCH/PUT /api/v1/users/:id
