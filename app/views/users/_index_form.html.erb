@@ -1,0 +1,49 @@
+<%= form_with(model: user, local: true, method: method, url: url) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2>入力値エラーです</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, "名前" %>
+    <%= form.text_field :name, value: @user_value[:name] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, "メールアドレス" %>
+    <%= form.text_field :email, value: @user_value[:email] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex, "性別" %>
+    <label><%= form.radio_button :sex, "男性", checked: (@user_value[:sex] == "男性")  %> 男性 </label>
+    <label><%= form.radio_button :sex, "女性", checked: (@user_value[:sex] == "女性") %> 女性 </label>
+    <label><%= form.radio_button :sex, "その他", checked: (@user_value[:sex] == "その他") %> その他 </label>
+  </div>
+
+  <div class="field">
+    <%= form.label :birth, "生年月日" %>
+    <%= form.text_field :birth, value: @user_value[:birth] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hobby, "趣味" %>
+    <%= form.text_field :hobby, value: @user_value[:hobby]  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job, "職業" %>
+    <%= form.text_field :job, value: @user_value[:job] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit value="決定" %>
+  </div>
+<% end %>

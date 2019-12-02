@@ -40,4 +40,4 @@
 
 <%= link_to '編集', edit_user_path(@user) %> |
 <%= link_to '好きな食べ物', "/users/#{@user.id}/favfoods" %>|
-<%= link_to '戻る', '/1' %>
+<%= link_to '戻る', index_path(user: @user_params) %>

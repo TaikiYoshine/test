@@ -16,6 +16,7 @@
                                       PUT    /users/:id(.:format)                                                                     users#update
                                       DELETE /users/:id(.:format)                                                                     users#destroy
                                       GET    /:id(.:format)                                                                           users#index
+                                index GET    /1(.:format)                                                                             users#index
                                       GET    /users(.:format)                                                                         redirect(301, /1)
                                  root GET    /                                                                                        redirect(301, /1)
                             api_users GET    /api/v1/users(.:format)                                                                  api/users#index
