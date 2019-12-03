@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   include UsersHelper
+
+  require 'net/http'
+  require 'json'
+  require 'uri'
   # GET /users
   # GET /users.json
   def index
@@ -55,6 +59,15 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user_params = session[:user]
+  end
+
+  # GET 
+  def api_show
+    url = URI.parse("http://localhost:3000/api/v1/users/5")
+    http = Net::HTTP.new(url.host, url.port)
+    req = Net::HTTP::Get.new(url.path)
+    res = http.request(req)
+    @hash = JSON.parse(res.body)
   end
 
   # GET /users/new
