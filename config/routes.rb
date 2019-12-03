@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/:id', to: 'users#index'
   # get '/users', to: redirect('/1')
+  get '/1', to: 'users#index', as: :index
   get '/users' => redirect('/1')
   # rootをページ番号1にリダイレクトさせている
   root to: redirect('/1')

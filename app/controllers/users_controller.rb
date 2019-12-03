@@ -11,26 +11,20 @@ class UsersController < ApplicationController
     @users = User.all
     @page = 1
     # ユーザー検索をしている
-    if params[:user]
-      if params[:user][:name].present?
-        @users = @users.where(name: params[:user][:name])
-      end
-      if params[:user][:email].present?
-        @users = @users.where(email: params[:user][:email])
-      end
-      if params[:user][:birth].present?
-        @users = @users.where(birth: params[:user][:birth])
-      end
-      if params[:user][:sex].present?
-        @users = @users.where(sex: params[:user][:sex])
-      end
-      if params[:user][:hobby].present?
-        @users = @users.where(hobby: params[:user][:hobby])
-      end
-      if params[:user][:job].present?
-        @users = @users.where(job: params[:user][:job])
-      end
+    session[:value] = params[:user]
+    if session[:value].nil?
+      session[:value] = { 'name' => '', 'email' => '', 'birth' => '', 'hobby' => '', 'job' => '' }
     end
+    @user_value = session[:value]
+    @user_params = session[:user]
+    if params[:user]
+      @users = @users.where(user_params_hash(params[:user]))
+      session[:value] = params[:user]
+    else
+      params[:user] = @user_params
+    end
+    session[:user] = params[:user]
+
     # 総ユーザー数取得
     @users_num = @users.count.to_i
     paging
@@ -59,7 +53,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show; end
+  def show
+    @user_params = session[:user]
+  end
 
   # GET /users/new
   def new
@@ -119,5 +115,16 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:name, :email, :sex, :birth, :hobby, :job)
+  end
+
+  def user_params_hash(param)
+    response = {}
+    response[:name] = param[:name] if param[:name].present?
+    response[:email] = param[:email] if param[:email].present?
+    response[:birth] = param[:birth] if param[:birth].present?
+    response[:sex] = param[:sex] if param[:sex].present?
+    response[:hobby] = param[:hobby] if param[:hobby].present?
+    response[:job] = param[:job] if param[:job].present?
+    response
   end
 end
