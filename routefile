@@ -19,6 +19,7 @@
                                 index GET    /1(.:format)                                                                             users#index
                                       GET    /users(.:format)                                                                         redirect(301, /1)
                                  root GET    /                                                                                        redirect(301, /1)
+                     api_show_users_5 GET    /api/show/users/5(.:format)                                                              users#api_show
                             api_users GET    /api/v1/users(.:format)                                                                  api/users#index
                                       POST   /api/v1/users(.:format)                                                                  api/users#create
                          new_api_user GET    /api/v1/users/new(.:format)                                                              api/users#new

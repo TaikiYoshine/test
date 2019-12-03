@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/users' => redirect('/1')
   # rootをページ番号1にリダイレクトさせている
   root to: redirect('/1')
+  get '/api/show/users/5', to: 'users#api_show'
 
   namespace :api do
     scope '/v1' do
