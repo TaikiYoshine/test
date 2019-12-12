@@ -61,9 +61,9 @@ class UsersController < ApplicationController
     @user_params = session[:user]
   end
 
-  # GET 
+  # GET
   def api_show
-    url = URI.parse("http://localhost:3000/api/v1/users/5")
+    url = URI.parse('http://localhost:3000/api/v1/users/5')
     http = Net::HTTP.new(url.host, url.port)
     req = Net::HTTP::Get.new(url.path)
     res = http.request(req)

@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
+<script type="text/javascript" src="main.js"></script>
 <h1>ユーザー検索</h1>
+<%= javascript_include_tag 'uranai.js' %>
+<div>
+<%= javascript_include_tag 'time.js' %>
+</div>
 
 <%= render 'index_form', user: @user, method: :get, url: "/#{params[:id].to_i}" %>
 
@@ -135,3 +140,6 @@
     </td>
   </tr>
 </table>
+
+<br><br>
+<input type="button" value="寿司占い" onclick="ura();">
