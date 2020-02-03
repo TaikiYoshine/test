@@ -15,9 +15,9 @@ export default {
   ],
 
   output: {
-    path: dist,
+    path:  '/Users/yoshine-taiki/practice/practice_app3/public/packs/javascripts',
     filename: '[name]-[hash].js',
-    publicPath: 'http://localhost:8080/', // webpack-dev-serverのURLを指定する
+    //publicPath: 'http://localhost:8080/', // webpack-dev-serverのURLを指定する
   },
 
   module: {
@@ -39,7 +39,7 @@ export default {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: app + '/views/index.html.erb'
+      template: src + '/index.html'
     }),
     new ManifestPlugin(),  // manifest.jsonを出力するプラグイン
   ]
